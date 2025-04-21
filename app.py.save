@@ -1,0 +1,42 @@
+import streamlit as st
+
+# Set up the Streamlit page layout
+st.set_page_config(page_title="AI Hiring Assistant", layout="wide")
+
+# Header Section
+st.title("TalentScout AI Hiring Assistant")
+st.write("""
+    Welcome to the TalentScout AI Hiring Assistant. Please fill out the form below to begin the candidate screening process.
+""")
+
+# Candidate Information Form
+with st.form(key="candidate_form"):
+    full_name = st.text_input("Full Name")
+    email = st.text_input("Email Address")
+    phone = st.text_input("Phone Number")
+    years_of_experience = st.number_input("Years of Experience", min_value=0, max_value=30, value=0)
+    desired_position = st.text_input("Desired Position")
+    current_location = st.text_input("Current Location")
+    tech_stack = st.text_input("Tech Stack (e.g., Python, JavaScript, Django, SQL)")
+
+    # Submit button
+    submit_button = st.form_submit_button("Submit")
+   # Process and display the data after form submission
+if submit_button:
+    st.write(f"Full Name: {full_name}")
+    st.write(f"Email Address: {email}")
+    st.write(f"Phone Number: {phone}")
+    st.write(f"Years of Experience: {years_of_experience}")
+    st.write(f"Desired Position: {desired_position}")
+    st.write(f"Current Location: {current_location}")
+    st.write(f"Tech Stack: {tech_stack}")
+
+    # Eligibility logic based on years of experience
+    if years_of_experience < 2:
+        eligibility = "junior"
+    elif years_of_experience < 5:
+        eligibility = "mid"
+    else:
+        eligibility = "senior"
+
+    st.write(f"Based on your experience, you are eligible for {eligibility} roles."
